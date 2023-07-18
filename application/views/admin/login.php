@@ -104,6 +104,7 @@ $(function() {
 				";
 			}
 		}
+		$this->session->unset_userdata('alert');
 	}	
 	?>
 

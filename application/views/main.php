@@ -182,6 +182,13 @@
 			</a>
 			</li>
 			<li class="nav-header">MENUS</li>
+			<?php $menus = $this->db->query('SELECT id, title FROM menus WHERE status = "Active" and has_submenu = "Yes"')->result_array(); 
+			foreach ($menus as $menu) {
+				echo '<li class="nav-item"><a href="/menu/submenu/'.$menu['id'].'" class="nav-link"><i class="nav-icon far fa-plus-square"></i><p>'.$menu['title'].'</p></a></li>';
+			}
+			
+			?>
+
 		  </ul>
 	  </nav>
 	  <!-- /.sidebar-menu -->
@@ -235,5 +242,33 @@
 
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="/assets/lte/dist/js/demo.js"></script> -->
+<script type="text/javascript">
+$(function() {
+	<?php
+	$alert = $this->session->userdata('alert');
+	if ($alert) {
+		foreach ($alert as $class => $message) {
+			if (is_array($message)) {
+				echo "
+				$(document).Toasts('create', {
+					title: '".ucfirst($class)."',
+					body: '".implode('<br />', $message)."'
+				  })
+				";
+			} else {
+				echo "
+				$(document).Toasts('create', {
+					title: '".ucfirst($class)."',
+					body: '".str_replace("\n", '<br />', $message)."'
+				  })
+				";
+			}
+		}
+		$this->session->unset_userdata('alert');
+	}	
+	?>
+
+});
+</script>
 </body>
 </html>

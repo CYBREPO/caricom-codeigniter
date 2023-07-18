@@ -1,6 +1,6 @@
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title">Menu List</h3>
+		<h3 class="card-title"><?php echo $main_menu['title'] ?> List</h3>
 
 		<div class="card-tools">
 			<div class="input-group input-group-md" style="width: 350px;">
@@ -12,7 +12,7 @@
 					</button>
 				</div>
 				
-				<div><a class="btn btn-primary" href="/menu/edit/0">Add Menu</a></div>
+				<div><a class="btn btn-primary" href="<?php echo '/menu/submenu_edit/'.$main_menu['id'].'/0' ?>">Add <?php echo $main_menu['title'] ?> Menu</a></div>
 			</div>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 				foreach ($rows as $row) {
 					echo '<tr>
 						<td>'.$i++.'</td>
-						<td>'.anchor('menu/edit/'.$row['id'], $row['title']).'</td>
+						<td>'.anchor('/menu/submenu_edit/'.$main_menu['id'].'/'.$row['id'], $row['title']).'</td>
 						<td>'.$row['has_submenu'].'</td>
 						<td>'.$row['status'].'</td>
 					</tr>';
