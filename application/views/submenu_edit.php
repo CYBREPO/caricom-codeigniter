@@ -5,7 +5,7 @@
 				<div class="card-header">
 				<h3 class="card-title"><a href="<?php echo '/menu/submenu/'.$main_menu['id'] ?>"><b><i class="fas fa-chevron-circle-left"></i></b></a> Add Menu</h3>
 				</div>
-				<?php echo form_open($this->uri->uri_string(), ["id" => 'MainForm']) ?>
+				<?php echo form_open_multipart($this->uri->uri_string(), ["id" => 'MainForm']) ?>
 				<?php echo form_hidden($id) ?>
 					<div class="card-body">
 						<div class="row">
@@ -29,11 +29,31 @@
 							</div>
 						</div>
 						
-						<div class="form-group">
-							<label for="description">Description</label>
-							<textarea name="description" class="form-control" id="summernote" rows="7" cols="40">
-								<?php echo $row['description']; ?>
-							</textarea>
+						<div class="row">
+							<div class="col-md-8">
+								<div class="form-group">
+									<label for="description">Description</label>
+									<textarea name="description" class="form-control" id="summernote" rows="7" cols="40">
+										<?php echo $row['description']; ?>
+									</textarea>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									
+									<label for="title">Image</label>
+									<br>
+									<?php 
+										if (strlen(trim($row['file'])) > 0) {
+											echo '<img src="'.$docurl.$row['file'].'" alt="Content Image" width="50%" height="50%">';
+											echo '&nbsp;&nbsp;<a href="/menu/delfile/'.$id['id'].'/'.$main_menu['id'].'" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>';
+										} else {
+											echo '<input class="form-control" type="file" name="userfile" size="40">';
+
+										}
+									?>
+								</div>
+							</div>
 						</div>
 						
 

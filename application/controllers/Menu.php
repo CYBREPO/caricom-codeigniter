@@ -52,7 +52,7 @@ class Menu extends CI_Controller {
 
             $docdir = implode('/', str_split($id)).'/';
             $data['id'] = ['id'=>$id];
-            $data['docurl'] = '/documents/menus/'.$docdir;
+            $data['docurl'] = base_url('/documents/menus/'.$docdir);
             $data['row'] = $row;
             $data['title'] = 'Manage Menus';
             $data['page'] = 'menu_edit';
@@ -151,8 +151,10 @@ class Menu extends CI_Controller {
                 $this->session->set_userdata($alert);
             }
 
+            $docdir = implode('/', str_split($id)).'/';
             $data['id']        = ['id' => $id];
             $data['row']       = $row;
+            $data['docurl'] = base_url('/documents/menus/'.$docdir);
             $data['main_menu'] = $main_menu;
             $data['title']     = $main_menu['title'];
             $data['page']      = 'submenu_edit';
@@ -169,6 +171,28 @@ class Menu extends CI_Controller {
 
             $id = $this->basemodel->save('menus', $data, ['id' => $id]);
 
+            if ($id) {
+                $config['upload_path']   = './php_uploads/';
+                $config['allowed_types'] = 'gif|png|jpg|jpeg|bmp';
+                $config['encrypt_name']  = true;
+                $config['remove_spaces'] = true;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if($this->upload->do_upload()) {
+                    $image = $this->upload->data();
+                    $newfile = uniqid().$image['file_ext'];
+                    $docdir = implode('/', str_split($id)).'/';
+
+                    mkdir(FCPATH.'documents/menus/'.$docdir, 0777, TRUE);
+                    rename($image['full_path'], FCPATH.'documents/menus/'.$docdir.$newfile);
+                   
+                    $this->db->update('menus', ['file' => $newfile], ['id' => $id]);
+
+                }
+
+            }
+
             $alert['alert'] = $this->session->userdata("alert");
             $alert['alert']['success'] = trim('Changes Saved Successfully');
             if (! $alert['alert']['success']) {
@@ -179,7 +203,7 @@ class Menu extends CI_Controller {
         }
     }
 
-    function delfile($id) {
+    function delfile($id, $submenu = 0) {
         $docdir = implode('/', str_split($id)).'/';
         $file = $this->db->query('select file from menus where id = ?', [$id])->row_array();
         $this->db->update('menus', ['file' => ''], ['id' => $id]);
@@ -194,6 +218,10 @@ class Menu extends CI_Controller {
             $alert['alert']['success'] = explode("\n", trim('Image Deleted Successfully'));
         }
         $this->session->set_userdata($alert);
-        redirect('/menu/edit/'.$id);
+        if ($submenu) {
+            redirect('/menu/submenu_edit/'.$submenu.'/'.$id);
+        } else {
+            redirect('/menu/edit/'.$id);
+        }
     }
 }

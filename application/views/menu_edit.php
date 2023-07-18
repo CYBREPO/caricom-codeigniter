@@ -38,7 +38,7 @@
 								</div>
 							</div>
 							<div class="col-md-4">
-							<div class="form-group">
+								<div class="form-group">
 								
 								<label for="title">Image</label>
 								<br>
@@ -51,6 +51,7 @@
 
 									}
 								?>
+								</div>
 							</div>
 						</div>
 						
