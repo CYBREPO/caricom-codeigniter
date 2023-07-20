@@ -3,22 +3,28 @@
 		<div class="col-md-12">
 			<div class="card card-primary">
 				<div class="card-header">
-				<h3 class="card-title"><a href="/menu"><b><i class="fas fa-chevron-circle-left"></i></b></a> Add Menu</h3>
+				<h3 class="card-title"><a href="/slider"><b><i class="fas fa-chevron-circle-left"></i></b></a> Add Slider</h3>
 				</div>
 				<?php echo form_open_multipart($this->uri->uri_string(), ["id" => 'MainForm']) ?>
 				<?php echo form_hidden($id) ?>
 					<div class="card-body">
 						<div class="row">
-							<div class="col-md-8">
+							<div class="col-md-6">
 								<div class="form-group  <?php echo (strlen(form_error('title')) > 0 ? 'has-error' : '') ?>">
-									<label for="title">Menu Title</label>
-									<input type="text" name="title" class="form-control" id="title" placeholder="Enter menu" value="<?php echo $row['title']; ?>">
+									<label for="title">Slider Title</label>
+									<input type="text" name="title" class="form-control" id="title" placeholder="Enter Slider Title" value="<?php echo $row['title']; ?>">
 								</div>
 							</div>
 							<div class="col-md-2">
-								<div class="form-group">
-									<label for="title">Has Submenu?</label>
-									<?php echo form_dropdown('has_submenu', ['No' => 'No', 'Yes' => 'Yes'], $row['has_submenu'], 'class="form-control" id="has_submenu"')?>
+                                <div class="form-group">
+                                    <label for="title">Slider Button Text</label>
+                                    <input type="text" name="btn_text_one" class="form-control" id="btn_text_one" placeholder="Button Text" value="<?php echo $row['btn_text_one']; ?>">
+								</div>
+							</div>
+							<div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="title">Slider Button Url</label>
+                                    <input type="text" name="btn_url_one" class="form-control" id="btn_url_one" placeholder="Button URL" value="<?php echo $row['btn_url_one']; ?>">
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -44,8 +50,8 @@
 								<br>
 								<?php 
 									if (strlen(trim($row['file'])) > 0) {
-										echo '<img src="'$row['file'].'" alt="Content Image" width="50%" height="50%">';
-										echo '&nbsp;&nbsp;<a href="/menu/delfile/'.$id['id'].'" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>';
+										echo '<img src="'.$row['file'].'" alt="Content Image" width="50%" height="50%">';
+										echo '&nbsp;&nbsp;<a href="/slider/delfile/'.$id['id'].'" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>';
 									} else {
 										echo '<input class="form-control" type="file" name="userfile" size="40">';
 

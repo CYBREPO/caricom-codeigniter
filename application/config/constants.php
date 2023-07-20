@@ -85,8 +85,8 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 if(SITE_LIVE === 'live'){
-	defined('DB_USER')             OR define('DB_USER', 'carifacts');
-    defined('DB_PWD')              OR define('DB_PWD', 'EEK].x?)3pr~');
+	defined('DB_USER')             OR define('DB_USER', 'carifacts.com');
+    defined('DB_PWD')              OR define('DB_PWD', '');
     defined('DB_NAME')             OR define('DB_NAME','carifacts');
 }else if(SITE_LIVE === 'local'){
 	defined('DB_USER')             OR define('DB_USER', 'root');

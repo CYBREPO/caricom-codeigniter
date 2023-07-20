@@ -150,7 +150,7 @@
 			</a>
 		  </li>
 		  <li class="nav-item">
-			<a href="../gallery.html" class="nav-link">
+			<a href="/slider" class="nav-link">
 			  <i class="nav-icon far fa-image"></i>
 			  <p>
 				Sliders

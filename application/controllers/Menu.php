@@ -28,6 +28,7 @@ class Menu extends CI_Controller {
         if (! $row) {
             $row = [
                 'id'          => 0,
+                'file'       => '',
                 'title'       => '',
                 'description' => '',
                 'has_submenu' => 'No',
@@ -84,7 +85,7 @@ class Menu extends CI_Controller {
                     mkdir(FCPATH.'documents/menus/'.$docdir, 0777, TRUE);
                     rename($image['full_path'], FCPATH.'documents/menus/'.$docdir.$newfile);
                    
-                    $this->db->update('menus', ['file' => $newfile], ['id' => $id]);
+                    $this->db->update('menus', ['file' => base_url('/documents/menus/'.$docdir).$newfile], ['id' => $id]);
 
                 }
 
@@ -130,6 +131,7 @@ class Menu extends CI_Controller {
                 'id'          => 0,
                 'parent_id'   => $menu_id,
                 'title'       => '',
+                'file'       => '',
                 'description' => '',
                 'has_submenu' => 'No',
                 'status'      => 'Active',
@@ -166,7 +168,7 @@ class Menu extends CI_Controller {
                 'description' => trim($this->input->post('description')),
                 'status'      => $this->input->post('status'),
                 'has_submenu' => $this->input->post('has_submenu'),
-                'created'     => $id == 0 ? date('Y-m-d H: i: s'): $row['created'],
+                'created'     => $id == 0 ? date('Y-m-d H:i:s') : $row['created'],
             ];
 
             $id = $this->basemodel->save('menus', $data, ['id' => $id]);
@@ -187,7 +189,7 @@ class Menu extends CI_Controller {
                     mkdir(FCPATH.'documents/menus/'.$docdir, 0777, TRUE);
                     rename($image['full_path'], FCPATH.'documents/menus/'.$docdir.$newfile);
                    
-                    $this->db->update('menus', ['file' => $newfile], ['id' => $id]);
+                    $this->db->update('menus', ['file' => base_url('/documents/menus/'.$docdir).$newfile], ['id' => $id]);
 
                 }
 

@@ -45,7 +45,7 @@
 									<br>
 									<?php 
 										if (strlen(trim($row['file'])) > 0) {
-											echo '<img src="'.$docurl.$row['file'].'" alt="Content Image" width="50%" height="50%">';
+											echo '<img src="'.$row['file'].'" alt="Content Image" width="50%" height="50%">';
 											echo '&nbsp;&nbsp;<a href="/menu/delfile/'.$id['id'].'/'.$main_menu['id'].'" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>';
 										} else {
 											echo '<input class="form-control" type="file" name="userfile" size="40">';
